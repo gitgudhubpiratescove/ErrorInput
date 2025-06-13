@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>ErrorInput</title>
+  <title>Input</title>
   <style>
     body {
       background-color: black;
@@ -29,30 +29,29 @@
 </head>
 
 <body>
-  <div class="input-text">Enter input.</div>
-  <input type="text" class="text-input" placeholder="Type here...">
-  <script src="script.js"></script>
+  <div class="input-text"> Enter Code.</div>
+  <input type="text" class="text-input" placeholder="Enter code...">
+
+  <script>
+    const input = document.querySelector('.text-input');
+
+    const validCodes = {
+      'Pirates cove': 'https://sites.google.com/view/pirates-cove-wiki/home',
+    };
+
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const value = e.target.value.trim();
+        if (validCodes[value]) {
+          window.location.href = validCodes[value];
+        } else {
+          // Google search
+          const query = encodeURIComponent(value);
+          window.location.href = `https://www.google.com/search?q=${query}`;
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
-
-<script>
-const input = document.querySelector('.text-input');
-
-const validCodes = {
-    '3240': 'https://www.youtube.com/shorts/cEiyRlvhy88',
-};
-
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        const value = e.target.value.toLowerCase();
-        if (!validCodes[value]) {
-            input.placeholder = "Wrong input!";
-            input.value = '';
-            window.location.href = 'https://ErrorInput.com';
-        } else {
-            window.location.href = validCodes[value];
-        }
-    }
-});
-</script>
